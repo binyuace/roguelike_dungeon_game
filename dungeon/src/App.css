@@ -22,3 +22,32 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.red {
+  background-color: red
+}
+.grey {
+  background-color: grey
+}
+.red {
+  background-color: blue
+}
+.grid {
+  height:10px;
+  width:10px;
+  background-color: black;
+  position: relative;
+  float:left;
+  cursor:pointer;
+}
+.board {
+  height:800px;
+  width:1000px;
+  margin:auto;
+}
+.container {
+  background-color: lightgrey;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin:auto;
+  padding-bottom: 50px;
+}
