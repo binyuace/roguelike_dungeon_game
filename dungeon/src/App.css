@@ -41,6 +41,10 @@
   position: absolute;
   background-color: blue;
 }
+.enemy {
+  position: absolute;
+  background-color: red;
+}
 .board {
   position: relative;
   margin:auto;
