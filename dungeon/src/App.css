@@ -32,19 +32,21 @@
   background-color: blue
 }
 .grid {
-  height:10px;
-  width:10px;
   background-color: black;
   position: relative;
   float:left;
   cursor:pointer;
 }
+.player {
+  position: absolute;
+  background-color: blue;
+}
 .board {
-  height:800px;
-  width:1000px;
+  position: relative;
   margin:auto;
 }
 .container {
+  position: relative;
   background-color: lightgrey;
   padding-right: 15px;
   padding-left: 15px;
