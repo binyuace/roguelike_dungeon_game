@@ -5,6 +5,7 @@ import Board from './board'
 import construction from './construction'
 import Info from './info'
 var log = console.log.bind(console)
+
 class Player extends Component {
   render() {
     let x = this.props.position[0], y = this.props.position[1]
@@ -29,9 +30,12 @@ class App extends Component {
       player:construction.initialPlayer(),
       playerPosition:construction.initialPlayer().position,
       board : construction.initialBoard(),
+      title:'Welcome to The Dungeon',
+      toggle:true,
     }
     this.handleKey = this.handleKey.bind(this)
     this.move = this.move.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     console.log(this)
   }
   handleKey(event,keydown) {
@@ -105,14 +109,19 @@ class App extends Component {
 
     }
   }
+  handleClick() {
+    this.setState({toggle:!this.state.toggle})
+  }
   restart(win) {
-    // if (win) {alert('you win! Congratulations!')}
-    //   else alert('you lose, restart?')
+    if (win) {this.setState({title:'you win! Congratulations!'})}
+      else this.setState({title:'you lose'})
     this.setState({
         player:construction.initialPlayer(),
         playerPosition:construction.initialPlayer().position,
         board:construction.initialBoard(),
       })
+    let This = this
+    setTimeout(function() {This.setState({title:'Welcome to The Dungeon'})}, 2000);
     }
   componentWillMount(){
     this.update = setInterval(this.move,100)
@@ -121,17 +130,24 @@ class App extends Component {
   }
   render() {
     const boardStyle = {height:this.state.board.length*construction.gridSize,width:this.state.board[0].length*construction.gridSize}
+    let title = this.state.title
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Welcome to The Dungeon</h2>
-          <Info player = {this.state.player}/>
+          <h2>{title}</h2>
+           <button onClick = {this.handleClick}> Toggle</button>
         </div>
         <div className ="container">
+         
           <div className = "board" style ={boardStyle}>
-            <Board board = {this.state.board} />
+            <Board
+            board = {this.state.board} 
+            toggle = {this.state.toggle}
+            position = {this.state.playerPosition}
+            />
             <Player position = {this.state.playerPosition}/>
           </div>
+          <Info player = {this.state.player}/>
         </div>
       </div>
     );

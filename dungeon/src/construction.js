@@ -1,8 +1,8 @@
-
+  
 import {NewDungeon} from 'random-dungeon-generator'
 
 const options = {
-    width: 50,
+    width: 80,
     height: 40,
     minRoomSize: 20,
     maxRoomSize: 25,

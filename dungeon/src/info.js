@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 class Info extends Component {
   render() {
-    return <div> 
-        HP: {this.props.player.hp}
-        &nbsp;&nbsp;
-        Weapon: {this.props.player.weapon.weaponName}
-        &nbsp;&nbsp;
-        Attack: {this.props.player.weapon.attack}
-      </div>
+    return <div className = 'info'> 
+        HP: {this.props.player.hp}<br/>
+        Weapon: {this.props.player.weapon.weaponName}<br/>
+        Attack: {this.props.player.attack}<br/>
+        Level:{this.props.player.level}
+	      </div>
   }
 }
 export default Info

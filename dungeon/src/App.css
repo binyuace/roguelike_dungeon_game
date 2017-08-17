@@ -1,3 +1,6 @@
+body {
+  min-width: 1300px;
+}
 .App {
   text-align: center;
 }
@@ -9,7 +12,7 @@
 
 .App-header {
   background-color: #222;
-  height: 70px;
+  height: 80px;
   padding: 20px;
   color: white;
 }
@@ -51,6 +54,10 @@
   position: absolute;
   background-color: lightgreen;
 }
+.white {
+  position: absolute;
+  background-color: white;
+}
 .boss {
   position: absolute;;
   background-color: pink;
@@ -58,13 +65,33 @@
 .board {
   background-color: black;
   position: relative;
-  margin:auto;
+  float:left;
+
 }
 .container {
-  position: relative;
   background-color: lightgrey;
   padding-right: 15px;
   padding-left: 15px;
   margin:auto;
   padding-bottom: 50px;
+}
+.info {
+  float: left;
+  position: relative;
+  font-size: 25px;
+}
+.container:before,
+.container:after {
+  display: table;
+  content: " ";
+  clear:both;
+}
+button {
+  cursor:pointer;
+  margin-top: -20px;
+  width:80px;
+  height:40px;
+  outline:none;
+  border:none;
+  font-size: 20px;
 }
