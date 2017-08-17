@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 70px;
   padding: 20px;
   color: white;
 }
@@ -32,10 +32,8 @@
   background-color: blue
 }
 .grid {
-  background-color: black;
-  position: relative;
-  float:left;
-  cursor:pointer;
+  background-color: grey;
+  position: absolute;
 }
 .player {
   position: absolute;
@@ -45,7 +43,20 @@
   position: absolute;
   background-color: red;
 }
+.weapon {
+  position: absolute;
+  background-color: silver;
+}
+.food {
+  position: absolute;
+  background-color: lightgreen;
+}
+.boss {
+  position: absolute;;
+  background-color: pink;
+}
 .board {
+  background-color: black;
   position: relative;
   margin:auto;
 }
