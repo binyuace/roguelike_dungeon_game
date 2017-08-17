@@ -79,6 +79,7 @@ class App extends Component {
           player.fight(board[x][y])
           if (go.hp <= 0 ) {
             board[x][y] = 0
+            player.xp += 10
           } else if (player.hp <= 0) {
             this.restart(false)
           } 

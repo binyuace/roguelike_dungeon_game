@@ -67,8 +67,15 @@ var construction  = {
       hp:100,
       weapon:construction.weapons[0],
       position:[2,2],
+      attack() {
+        return this.weapon.attack + this.level() * 10 - 10
+      },
+      level() {
+        return Math.floor(this.xp/50)+1
+      },
+      xp:0,
       fight(enemy) {
-        let attack = this.weapon.attack
+        let attack = this.attack()
         enemy.hp -= randomInt(attack) 
         if (enemy.hp > 0){
           this.hp -= enemy.hurt
