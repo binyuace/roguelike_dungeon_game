@@ -23,32 +23,46 @@ var construction  = {
       'key' : 0,
       'name':'weapon',
       'weaponName' : 'wood',
-      'attack' : 10,
+      'attack' : 20,
       'color' : 'brown',
     },
     {
       'key' : 1,
       'name':'weapon',
       'weaponName' : 'silver',
-      'attack' : 20,
+      'attack' : 30,
       'color' : 'silver',
     },
     { 
       'key' : 2,
       'name':'weapon',
       'weaponName' :'gold',
-      'attack' : 30,
+      'attack' : 50,
       'color' : 'gold',
     },
+    {
+      'key' : 3,
+      'name':'weapon',
+      'weaponName' :'diamond',
+      'attack' : 80,
+      'color' : 'diamond',
+    },
+    {
+      'key' : 4,
+      'name':'weapon',
+      'weaponName' :'Ultimate Sword',
+      'attack' : 100,
+      'color' : 'red',
+    }
   ],
-  initialEnemies() {  
+  initialEnemies(floor) {  
     let a = Array(randomInt(10)+2).fill(null)
     a.forEach( function(arr,idx){ 
         const temp =  { 
           key:idx,
           name:'enemy',
-          hp:randomInt(10)+5,
-          hurt:randomInt(10)+5,
+          hp:randomInt(20*floor)+30,
+          hurt:randomInt(8*floor)+5,
         } 
         place(temp)
       }
@@ -67,6 +81,7 @@ var construction  = {
       hp:100,
       weapon:construction.weapons[0],
       position:[2,2],
+      floor:1,
       attack() {
         return this.weapon.attack + this.level() * 10 - 10
       },
@@ -83,36 +98,41 @@ var construction  = {
       }
     }
   },
-  initialBoard(){ 
+  initialBoard(floor){ 
     Dungeon = newDungeon()
-    this.initialBoss()
-    this.initialEnemies()
-    this.initialFoods()
-    this.initialWeapons()
+    if(floor === 4) {this.initialBoss()}
+    this.initialEnemies(floor)
+    this.initialFoods(floor)
+    this.initialWeapon(floor)
+    if (floor < 4) {this.initialGate()}
     return Dungeon
   },
-  initialFoods(){
+  initialGate() {
+    let gate = {
+      name : 'gate',
+    }
+    place(gate)
+  },
+  initialFoods(floor){
     let a = Array(10).fill(0)
     a.forEach(function(a,idx) {
       let temp = {
         key : idx,
         name:'food',
-        hp:randomInt(15)+5,
+        hp:randomInt(10*floor)+5,
       } 
       place(temp)
     })
   },
-  initialWeapons(){
-    let a = this.weapons.slice(1)
-    a.forEach(function(arr,idx) {
-      place(arr)
-    })
+  initialWeapon(floor){
+    let weapon = this.weapons[floor]
+    place(weapon)
   },
   initialBoss(){
     let boss = { 
           name:'boss',
-          hp:randomInt(100)+50,
-          hurt:randomInt(20)+5,
+          hp:randomInt(200)+800,
+          hurt:randomInt(20)+30,
         }
     while(true) {
       let pos = randomPosition()

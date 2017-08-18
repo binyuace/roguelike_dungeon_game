@@ -13,23 +13,13 @@ class Player extends Component {
     return <div className="player" style ={style}> </div>
   }
 }
-class Enemies extends Component {
-  render() {
-    let a =  this.props.enemies.map(function(arr,idx){
-      let x = arr.position[0], y = arr.position[1]
-      const style = Object.assign({},construction.gridPosition(x,y),construction.gridStyle())
-      return <div className = 'enemy' style = {style} key={idx}></div>
-    })
-    return <div>{a}</div>
-    } 
-}
 class App extends Component { 
   constructor() {
     super()
     this.state = {
       player:construction.initialPlayer(),
       playerPosition:construction.initialPlayer().position,
-      board : construction.initialBoard(),
+      board : construction.initialBoard(1),
       title:'Welcome to The Dungeon',
       toggle:true,
     }
@@ -83,7 +73,7 @@ class App extends Component {
           } else if (player.hp <= 0) {
             this.restart(false)
           } 
-          this.setState({player:player})
+          else this.setState({player:player})
       }
       // boss
       else if (go.name === 'boss') {
@@ -92,8 +82,9 @@ class App extends Component {
           this.restart(true)
         } else if (player.hp <= 0){
           this.restart(false)
+        } else if (player.hp > 0) {
+          this.setState({player:player})
         }
-        else this.setState({player:player})
       }
       // food
       else if (go.name === 'food') {
@@ -106,6 +97,15 @@ class App extends Component {
         player.weapon = go
         board[x][y] = 0
         this.setState({playerPosition:[x,y]})
+      } 
+      else if (go.name === 'gate') {
+        player.floor++
+        this.setState({player:player})
+        this.setState({
+          title:'you have entered a new Dungeon',
+          playerPosition:construction.initialPlayer().position,
+          board:construction.initialBoard(player.floor),
+        })
       }
 
     }
@@ -115,11 +115,11 @@ class App extends Component {
   }
   restart(win) {
     if (win) {this.setState({title:'you win! Congratulations!'})}
-      else this.setState({title:'you lose'})
+      else {this.setState({title:'you lose'})}
     this.setState({
         player:construction.initialPlayer(),
         playerPosition:construction.initialPlayer().position,
-        board:construction.initialBoard(),
+        board:construction.initialBoard(1),
       })
     let This = this
     setTimeout(function() {This.setState({title:'Welcome to The Dungeon'})}, 2000);
